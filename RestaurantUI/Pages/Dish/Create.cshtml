@@ -1,0 +1,31 @@
+﻿﻿
+@page "/Restaurant/{restaurantId:int}/Dish/Create"
+@model RestaurantUI.Pages.Dish.CreateModel
+
+@{
+    ViewData["Title"] = "Create Dish";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Create Dish</h2>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="DishVM.Name" class="control-label"></label>
+        <input asp-for="DishVM.Name" class="form-control" />
+        <span asp-validation-for="DishVM.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DishVM.Description" class="control-label"></label>
+        <input asp-for="DishVM.Description" class="form-control" />
+        <span asp-validation-for="DishVM.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DishVM.Price" class="control-label"></label>
+        <input asp-for="DishVM.Price" class="form-control" />
+        <span asp-validation-for="DishVM.Price" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="DishVM.RestaurantId" value="@Model.RestaurantId" />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="/Dish/Index" asp-route-restaurantId="@Model.RestaurantId" class="btn btn-secondary">Back to List</a>
+
+</form>

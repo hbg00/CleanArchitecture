@@ -1,0 +1,72 @@
+﻿﻿
+@page "/Restaurant/Create"
+@model RestaurantUI.Pages.Restaurant.CreateModel
+
+@{
+    ViewData["Title"] = "Create Restaurant";
+}
+
+<h1>Create New Restaurant</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.Name"></label>
+        <input asp-for="CreateRestaurantVM.Name" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.Description"></label>
+        <input asp-for="CreateRestaurantVM.Description" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.Category"></label>
+        <input asp-for="CreateRestaurantVM.Category" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.Category" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.HasDelivery"></label>
+        <input asp-for="CreateRestaurantVM.HasDelivery" class="form-check-input" />
+        <span asp-validation-for="CreateRestaurantVM.HasDelivery" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.ContactEmail"></label>
+        <input asp-for="CreateRestaurantVM.ContactEmail" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.ContactEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.ContactName"></label>
+        <input asp-for="CreateRestaurantVM.ContactName" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.ContactName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.Address.City"></label>
+        <input asp-for="CreateRestaurantVM.Address.City" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.Address.City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.Address.Street"></label>
+        <input asp-for="CreateRestaurantVM.Address.Street" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.Address.Street" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateRestaurantVM.Address.PostalCode"></label>
+        <input asp-for="CreateRestaurantVM.Address.PostalCode" class="form-control" />
+        <span asp-validation-for="CreateRestaurantVM.Address.PostalCode" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-page="/Restaurant/Index" class="btn btn-secondary">Back to Restaurants list</a>
+</form>
+
+
+    

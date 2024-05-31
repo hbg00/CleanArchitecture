@@ -1,0 +1,70 @@
+﻿﻿
+@page "{id:int}"
+@model RestaurantUI.Pages.Restaurant.UpdateModel
+
+@{
+    ViewData["Title"] = "Update Restaurant";
+}
+
+<h1>Update Restaurant</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.Name"></label>
+        <input asp-for="UpdateRestaurantVM.Name" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.Description"></label>
+        <input asp-for="UpdateRestaurantVM.Description" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.Category"></label>
+        <input asp-for="UpdateRestaurantVM.Category" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.Category" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.HasDelivery"></label>
+        <input asp-for="UpdateRestaurantVM.HasDelivery" class="form-check-input" />
+        <span asp-validation-for="UpdateRestaurantVM.HasDelivery" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.ContactEmail"></label>
+        <input asp-for="UpdateRestaurantVM.ContactEmail" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.ContactEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.ContactName"></label>
+        <input asp-for="UpdateRestaurantVM.ContactName" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.ContactName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.Address.City"></label>
+        <input asp-for="UpdateRestaurantVM.Address.City" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.Address.City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.Address.Street"></label>
+        <input asp-for="UpdateRestaurantVM.Address.Street" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.Address.Street" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UpdateRestaurantVM.Address.PostalCode"></label>
+        <input asp-for="UpdateRestaurantVM.Address.PostalCode" class="form-control" />
+        <span asp-validation-for="UpdateRestaurantVM.Address.PostalCode" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-page="/Restaurant/Index" class="btn btn-secondary">Back to Restaurants list</a>
+</form>

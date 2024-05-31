@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService.Protos";
+
+service UserService {
+  rpc ListUsers (Empty) returns (UserList);
+  rpc DeleteUser (UserId) returns (Empty);
+}
+
+message Empty {}
+
+message UserId {
+  string id = 1;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string firstName = 3;
+  string lastName = 4;
+}
+
+message UserList {
+  repeated User users = 1;
+}

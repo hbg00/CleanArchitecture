@@ -1,0 +1,76 @@
+﻿﻿
+@page "/Restaurant"
+@using System.IdentityModel.Tokens.Jwt
+@using System.Security.Claims
+@model RestaurantUI.Pages.Restaurant.IndexModel
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+@{
+    ViewData["Title"] = "Restaurants";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    var token = HttpContextAccessor.HttpContext.Session.GetString("authToken");
+    var handler = new JwtSecurityTokenHandler();
+    var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
+    var isAdmin = jsonToken.Claims.Any(c => c.Type == ClaimTypes.Role && c.Value == "Administrator");
+}
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="mb-0">Restaurants</h1>
+    @if (isAdmin)
+    {
+        <a asp-page="/Restaurant/Create" class="btn btn-primary">Create New Restaurant</a>
+    }
+</div>
+
+@if (Model.Restaurants == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!Model.Restaurants.Any())
+{
+    <p>No restaurants found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Has Delivery</th>
+                <th>Address</th>
+                <th>Dishes</th>
+                @if (isAdmin)
+                {
+                    <th></th>
+                    <th></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var restaurant in Model.Restaurants)
+            {
+                <tr>
+                    <td>@restaurant.Name</td>
+                    <td>@restaurant.Description</td>
+                    <td>@restaurant.Category</td>
+                    <td>@(restaurant.HasDelivery ? "Yes" : "No")</td>
+                    <td>
+                        @restaurant.Address.Street, @restaurant.Address.City,
+                        @restaurant.Address.PostalCode
+                    </td>
+
+                    <td><a asp-page="/Dish/Index" asp-route-restaurantId="@restaurant.Id" class="btn btn-success">Menu</a></td>
+                    @if (isAdmin)
+                    {
+                        <td><a asp-page="/Restaurant/Update" asp-route-id="@restaurant.Id" class="btn btn-primary">Edit</a></td>
+                        <td><a asp-page="/Restaurant/Delete" asp-route-id="@restaurant.Id" class="btn btn-danger">Delete</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,23 @@
+﻿
+@page "/Account/Login"
+@model RestaurantUI.Pages.Account.LoginModel
+@{
+    Layout = "/Pages/Shared/_AccountLayout.cshtml";
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login Page</h1>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="LoginVM.Email">Username</label>
+        <input asp-for="LoginVM.Email" class="form-control" />
+        <span asp-validation-for="LoginVM.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LoginVM.Password">Password</label>
+        <input asp-for="LoginVM.Password" type="password" class="form-control" />
+        <span asp-validation-for="LoginVM.Password" class="text-danger"></span>
+    </div>
+    <div asp-validation-summary="All"></div>
+    <button type="submit" class="btn btn-primary">Sign In</button>
+</form>

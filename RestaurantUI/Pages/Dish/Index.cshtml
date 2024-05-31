@@ -1,0 +1,65 @@
+﻿﻿
+@page "/Restaurant/{restaurantId:int}/Dish"
+@using System.IdentityModel.Tokens.Jwt
+@using System.Security.Claims
+@model RestaurantUI.Pages.Dish.IndexModel
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var token = HttpContextAccessor.HttpContext.Session.GetString("authToken");
+    var handler = new JwtSecurityTokenHandler();
+    var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
+    var isAdmin = jsonToken.Claims.Any(c => c.Type == ClaimTypes.Role && c.Value == "Administrator");
+}
+<div class="d-flex justify-content-between">
+    <h1>Dishes</h1>
+    <div>
+        @if (isAdmin)
+        {
+            <a asp-page="/Dish/Create" asp-route-restaurantId="@Model.RestaurantId" class="btn btn-primary">Create New Dish</a>
+        }
+        <a asp-page="/Restaurant/Index" class="btn btn-secondary">Back to Restaurants list</a>
+        
+    </div>
+</div>
+
+@if (Model.Dishes == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!Model.Dishes.Any())
+{
+    <p>No dishes found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                @if (isAdmin)
+                {
+                    <th></th>
+                    <th></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dish in Model.Dishes)
+            {
+                <tr>
+                    <td>@dish.Name</td>
+                    <td>@dish.Description</td>
+                    <td>@dish.Price</td>
+                    @if(isAdmin)
+                    {
+                        <td><a asp-page="/Dish/Update" asp-route-id="@dish.Id" asp-route-restaurantId="@Model.RestaurantId" class="btn btn-primary">Edit</a></td>
+                        <td><a asp-page="/Dish/Delete" asp-route-id="@dish.Id" asp-route-restaurantId="@Model.RestaurantId" class="btn btn-danger">Delete</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
