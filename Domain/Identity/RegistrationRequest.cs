@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Identity.Validators;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Identity
 {
@@ -11,15 +12,15 @@ namespace Domain.Identity
         public string LastName { get; set; }
 
         [Required]
-        [EmailAddress]
+        [EmailAddressComplexity]
         public string Email { get; set; }
 
         [Required]
-        [MinLength(6)]
+        [MinLength(6, ErrorMessage = "Username must be at least 6 characters long.")]
         public string UserName { get; set; }
 
         [Required]
-        [MinLength(6)]
+        [PasswordComplexity]
         public string Password { get; set; }
     }
 }
