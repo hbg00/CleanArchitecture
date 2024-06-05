@@ -17,10 +17,10 @@ namespace Application.DTOs.Restaurant.Validators
 
             RuleFor(p => p.ContactEmail)
                 .EmailAddress().WithMessage("{PropertyName} must be a valid email address.")
-                .When(p => p.ContactEmail != null);
+                .Matches(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").WithMessage("{PropertyName} must be a valid email address.");
 
             RuleFor(p => p.ContactName)
-                .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 characters.")
+                .MaximumLength(25).WithMessage("{PropertyName} must not exceed 50 characters.")
                 .When(p => p.ContactName != null);
 
             RuleFor(a => a.Address)

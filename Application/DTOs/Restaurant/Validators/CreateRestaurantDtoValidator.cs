@@ -21,12 +21,12 @@ namespace Application.DTOs.Restaurant.Validators
             RuleFor(p => p.ContactEmail)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull()
-                .EmailAddress().WithMessage("{PropertyName} must be a valid email address.");
+                .Matches(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").WithMessage("{PropertyName} must be a valid email address.");
 
             RuleFor(p => p.ContactName)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull()
-                .MaximumLength(50).WithMessage("{PropertyName} must not exceed 50 characters.");
+                .MaximumLength(25).WithMessage("{PropertyName} must not exceed 50 characters.");
 
             RuleFor(p => p.Address).SetValidator(new CreateAddressDtoValidator());
         }
