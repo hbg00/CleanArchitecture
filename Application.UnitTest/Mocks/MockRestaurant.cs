@@ -40,20 +40,21 @@ namespace Application.UnitTest.Mocks
 
             mockRepo.Setup(r => r.GetAll()).ReturnsAsync(restaurants);
 
+            mockRepo.Setup(r => r.GetById(It.IsAny<int>())).ReturnsAsync((int id) => restaurants.FirstOrDefault(r => r.Id == id));
+
             mockRepo.Setup(r => r.Add(It.IsAny<Domain.Entity.Restaurant>())).ReturnsAsync((Domain.Entity.Restaurant restaurant) =>
             {
                 restaurants.Add(restaurant);
                 return restaurant;
             });
 
+            mockRepo.Setup(r => r.Update(It.IsAny<Domain.Entity.Restaurant>())).Returns(Task.CompletedTask);
+
+
             mockRepo.Setup(r => r.Delete(It.IsAny<Domain.Entity.Restaurant>())).Callback<Domain.Entity.Restaurant>(restaurant =>
             {
                 restaurants.Remove(restaurant);
             });
-
-            mockRepo.Setup(r => r.Update(It.IsAny<Domain.Entity.Restaurant>())).Returns(Task.CompletedTask);
-
-            mockRepo.Setup(r => r.GetById(It.IsAny<int>())).ReturnsAsync((int id) => restaurants.FirstOrDefault(r => r.Id == id));
 
             return mockRepo;
         }

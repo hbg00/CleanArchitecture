@@ -38,6 +38,7 @@ namespace Application.UnitTest.Mocks
                 addresses.Add(address);
                 return address;
             });
+
             return mockRepo;
         }
     }

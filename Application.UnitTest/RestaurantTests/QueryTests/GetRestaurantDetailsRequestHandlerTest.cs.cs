@@ -29,11 +29,12 @@ namespace Application.UnitTest.Restaurant.UnitTests.Query
             _handler = new GetRestaurantDetailsRequestHandler(
                 _mockRepo.Object,
                 _mapper);
+
               _unwantedProperties = new[] { "ContactEmail", "ContactName"};
         }
 
         [Fact]
-        public async Task Handle_SpecifcRestaurantValid_ShouldReturnRestaurnt()
+        public async Task Handle_SpecificRestaurantValid_ShouldReturnRestaurnt()
         {
             // Arrange
             var request = new GetRestaurantDetailsRequest { Id = 2 };
@@ -53,7 +54,7 @@ namespace Application.UnitTest.Restaurant.UnitTests.Query
         }
 
         [Fact]
-        public async Task Handle_SpecifcRestaurantInValid_ShouldNotFound()
+        public async Task Handle_SpecificRestaurantInValid_ShouldNotFound()
         {
             // Arrange
             var request = new GetRestaurantDetailsRequest { Id = 3 };

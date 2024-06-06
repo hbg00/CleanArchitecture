@@ -38,7 +38,6 @@ namespace Application.UnitTest.Restaurant.UnitTests.Command
                 _mockRestaurantRepository.Object,
                 _mockAddressRepository.Object,
                 _mockMapper);
-
         }
 
         [Theory]
@@ -82,6 +81,7 @@ namespace Application.UnitTest.Restaurant.UnitTests.Command
 
             var restaurant = await _mockRestaurantRepository.Object.GetById(1);
             var address = await _mockAddressRepository.Object.GetById(1);
+            
             restaurant.ShouldNotBeNull();
             restaurant.Name.ShouldBe(name);
             restaurant.Description.ShouldBe(description);
@@ -135,29 +135,20 @@ namespace Application.UnitTest.Restaurant.UnitTests.Command
             };
 
             // Act
-            var validator = new UpdateRestaurantDtoValidator();
-            var validationResult = await validator.ValidateAsync(updateRestaurantDto);
-
-            if (!validationResult.IsValid)
+            var command = new UpdateRestaurantCommand
             {
-                var command = new UpdateRestaurantCommand
-                {
-                    UpdateRestaurantDto = updateRestaurantDto
-                };
+                UpdateRestaurantDto = updateRestaurantDto
+            };
 
-                var exception = await Should.ThrowAsync<ValidationException>(()
-                     => _handler.Handle(command, CancellationToken.None));
-                var restaurant = await _mockRestaurantRepository.Object.GetAll();
+            var exception = await Should.ThrowAsync<ValidationException>(()
+                    => _handler.Handle(command, CancellationToken.None));
+            var restaurant = await _mockRestaurantRepository.Object.GetAll();
 
 
-                // Assert
-                restaurant.Count.ShouldBe(2);
-                exception.Message.ShouldContain("Validation failed");
-            }
-            else
-            {
-                false.ShouldBeTrue("Excepted failure but validation passed");
-            }
+            // Assert
+            restaurant.Count.ShouldBe(2);
+            exception.Message.ShouldContain("Validation failed");
+       
         }
     }
 }

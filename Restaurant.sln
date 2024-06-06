@@ -14,6 +14,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{DA1224FB-04D2-43A2-BE30-35387D68A051}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{DD316D92-B494-4D3D-8462-C9F4F6D38689}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastrucutre\DependencyInjection.cs = Infrastrucutre\DependencyInjection.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gRPC", "gRPC", "{921F0567-E4C5-4A3D-8701-911D36CE6980}"
 EndProject
