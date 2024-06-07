@@ -1,10 +1,10 @@
 import requests
 import json
 
-# Disable SSL verification (not recommended for production)
+# Disable SSL verification
 requests.packages.urllib3.disable_warnings()
 
-# Your API base URL
+# API base URL
 BASE_URL = "https://localhost:7160/api"
 
 # Function to test an API endpoint
@@ -26,14 +26,11 @@ def test_endpoint(method, endpoint, data=None, token=None):
         else:
             raise ValueError("Invalid method")
 
-        # Check if the response status code is not in the 2xx range
         response.raise_for_status()
 
-        # If the response content is empty, return None
         if not response.text:
             return None
 
-        # Try to decode the response content as JSON
         return response.json()
 
     except requests.exceptions.RequestException as e:
