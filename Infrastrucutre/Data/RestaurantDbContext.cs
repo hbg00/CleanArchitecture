@@ -1,8 +1,6 @@
 ﻿using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-
-
 namespace Infrastrucutre.Data
 {
     public class RestaurantDbContext : DbContext
@@ -16,7 +14,6 @@ namespace Infrastrucutre.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
         }
     }
 }

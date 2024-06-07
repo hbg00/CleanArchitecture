@@ -17,13 +17,15 @@ namespace Application.UnitTest.Restaurant.UnitTests.Command
     {
         private readonly IMapper _mockMapper;
         private readonly DeleteRestaurantCommandHandler _handler;
-
+        private readonly Mock<IAddressRepository> _addressRepositoryMock;
         private readonly Mock<IRestaurantRepository> _mockRestaurantRepository;
+        private readonly Mock<IDishRepository> _mockDishRepository;
 
         public DeleteRestaurantCommandHandlerTest()
         {
+            _mockDishRepository = new Mock<IDishRepository>();  
             _mockRestaurantRepository = MockRestaurant.GetRestaurantRepository();
-
+            _addressRepositoryMock = new Mock<IAddressRepository>();
             var mapperConfig = new MapperConfiguration(c => {
                 c.AddProfile<MappingProfile>();
             });
@@ -32,6 +34,8 @@ namespace Application.UnitTest.Restaurant.UnitTests.Command
 
             _handler = new DeleteRestaurantCommandHandler(
                 _mockRestaurantRepository.Object,
+                _mockDishRepository.Object,
+                _addressRepositoryMock.Object,
                 _mockMapper);
         }
 

@@ -5,8 +5,10 @@ using Infrastrucutre.Data;
 using Infrastrucutre.Repository;
 using Infrastrucutre.Repository.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace Infrastrucutre
 {
@@ -24,5 +26,7 @@ namespace Infrastrucutre
 
             return services;
         }
+
+        
     }
 }

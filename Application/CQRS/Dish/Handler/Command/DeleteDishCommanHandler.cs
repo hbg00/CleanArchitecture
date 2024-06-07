@@ -23,6 +23,7 @@ namespace Application.CQRS.Dish.Handler.Command
             if (dish == null)
                 throw new NotFoundException(nameof(Domain.Entity.Dish), request.RestaurantId);
 
+
             await _dishRepository.Delete(dish);
             return Unit.Value;
         }
