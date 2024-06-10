@@ -4,7 +4,7 @@ using Application.Exceptions;
 using Application.Persistence.Contracts;
 using AutoMapper;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
+using Application.Exceptions;
 
 namespace Application.CQRS.Dish.Handler.Command
 {
@@ -31,11 +31,8 @@ namespace Application.CQRS.Dish.Handler.Command
             var validationResult = await validator.ValidateAsync(request.CreateDishDto);
 
             if (!validationResult.IsValid)
-            {
-                var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-                throw new ValidationException($"Validation failed: {errors}");
-            }
-
+                throw new ValidationException(validationResult);
+            
             var dish = _mapper.Map<Domain.Entity.Dish>(request.CreateDishDto);
             dish.RestaurantId = request.RestaurantId;
 

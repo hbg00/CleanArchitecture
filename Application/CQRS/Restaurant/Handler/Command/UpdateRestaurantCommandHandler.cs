@@ -6,7 +6,7 @@ using Application.Persistence.Contracts;
 using AutoMapper;
 using Domain.Entity;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
+using Application.Exceptions;
 
 namespace Application.CQRS.Restaurant.Handler.Command
 {
@@ -28,10 +28,8 @@ namespace Application.CQRS.Restaurant.Handler.Command
             var validationResult = await validator.ValidateAsync(request.UpdateRestaurantDto);
 
             if (!validationResult.IsValid)
-            {
-                var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-                throw new ValidationException($"Validation failed: {errors}");
-            }
+                throw new ValidationException(validationResult);
+            
 
             var restaurant = await _restaurantRepository.GetById(request.Id);
             if (restaurant == null)
