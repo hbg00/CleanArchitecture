@@ -30,9 +30,11 @@ namespace RestraurantAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
+            app.UseMiddleware<ExceptionMiddleware>();
+            
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
